@@ -78,4 +78,15 @@ License:
 ![Reports](src/main/resources/Reports.PNG)
 ![Goodbye](src/main/resources/Goodbye.PNG)
 
+## Team members
+### Courtezz Johnson
+- [GitHub](https://github.com/courtezz)
+### Erika Rodriguez
+- [GitHub](https://github.com/Erikarod27)
+### Katherine Colon
+- [GitHub](https://github.com/KatherineColon)
+### Kaila McAlpine
+- [GitHub](https://github.com/KailaTheeNgineer)
+### Yordiana Rodriguez
+- [GitHub](https://github.com/Yordiana0912)
 
