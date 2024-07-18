@@ -10,12 +10,13 @@ Features:
 
       Transaction Management:
       
-            o	Add deposits with details such as date, time, description, vendor, and amount.
+            o	Add deposits with details such as date, time, description, 
+                vendor, and amount.
             o	Record payments with similar detailed information.
             
 	Ledger Display:
  
-            o     View the entire transaction history.
+            o   View the entire transaction history.
             o	Custom search.
             o	Filter to view only deposits or payments.
             o	Improved display for a more user-friendly experience.
@@ -31,13 +32,15 @@ Financial Reports:
 
 Error Handling:
 
-            o	Updated error catch mechanisms to ensure smooth and accurate transaction management.
+            o	Updated error catch mechanisms to ensure smooth and accurate 
+                transaction management.
             o	Clear error messages to guide users in correcting issues.
 
 Code Highlights
 
       Comparable Interface:
-            The implements keyword in Java allows access to an interface, such as Comparable.
+            The implements keyword in Java allows access to an interface, 
+             such as Comparable.
       
             o	Similar to a class but contains empty methods to be defined with @Override.
             o	The compareTo method, part of the Comparable interface, enables object comparison.
