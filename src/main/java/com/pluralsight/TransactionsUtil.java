@@ -15,8 +15,8 @@ public class TransactionsUtil {
 
     public static Scanner scanner = new Scanner(System.in);
 
-     //ArrayList object with Transactions objects as elements in list
-     static ArrayList<Transactions> list = new ArrayList<>();
+    //ArrayList object with Transactions objects as elements in list
+    static ArrayList<Transactions> list = new ArrayList<>();
     public static final String RED = "\u001B[31m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
     public static final String BRIGHT_GREEN = "\u001B[92m";
@@ -46,14 +46,14 @@ public class TransactionsUtil {
 
                     depositScreen = true;
                 } else {
-                   dateScreen = false;
+                    dateScreen = false;
                 }
             }
             boolean timeScreen = true;
             while (timeScreen) {
-                    System.out.print(BRIGHT_WHITE + "Time (hh:mm:ss): ");
-                    String stringTime = scanner.nextLine();
-                    time = Transactions.convertTime(stringTime);
+                System.out.print(BRIGHT_WHITE + "Time (hh:mm:ss): ");
+                String stringTime = scanner.nextLine();
+                time = Transactions.convertTime(stringTime);
                 if (Transactions.convertTime(stringTime) == null) {
                     System.out.println(RED + "Try Again");
 
@@ -171,7 +171,7 @@ public class TransactionsUtil {
         Collections.sort(list, Collections.reverseOrder());
         for (Transactions t : list) {
             if ((t.getDate().getMonthValue() == currentDate.getMonthValue())
-            && (t.getDate().getYear() == currentDate.getYear())) {
+                    && (t.getDate().getYear() == currentDate.getYear())) {
                 System.out.println(t);
             }
         }
@@ -190,7 +190,7 @@ public class TransactionsUtil {
         Collections.sort(list, Collections.reverseOrder());
         for (Transactions t : list) {
             if ((t.getDate().getMonthValue() == currentDateMinusMonth.getMonthValue()
-            && (t.getDate().getYear() == currentDateMinusMonth.getYear()))) {
+                    && (t.getDate().getYear() == currentDateMinusMonth.getYear()))) {
                 System.out.println(t);
             }
         }
@@ -252,30 +252,30 @@ public class TransactionsUtil {
     //description, vendor, and amount
     public void customSearch(){
         // Ensure the transactions list is loaded from the CSV file
-        readFile();
+        readCustomFile();
 
-            scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
 
-            System.out.print("Start Date (yyyy-mm-dd): ");
-            String startDateInput = scanner.nextLine();
-            LocalDate startDate = startDateInput.isEmpty() ? null : Transactions.convertDate(startDateInput);
+        System.out.print("Start Date (yyyy-mm-dd): ");
+        String startDateInput = scanner.nextLine();
+        LocalDate startDate = startDateInput.isEmpty() ? null : Transactions.convertDate(startDateInput);
 
 
-            System.out.print("End Date (yyyy-mm-dd): ");
-            String endDateInput = scanner.nextLine();
-            LocalDate endDate = endDateInput.isEmpty() ? null : Transactions.convertDate(endDateInput);
+        System.out.print("End Date (yyyy-mm-dd): ");
+        String endDateInput = scanner.nextLine();
+        LocalDate endDate = endDateInput.isEmpty() ? null : Transactions.convertDate(endDateInput);
 
-            System.out.print("Description: ");
-            String description = scanner.nextLine();
-            description = description.isEmpty() ? null : description;
+        System.out.print("Description: ");
+        String description = scanner.nextLine();
+        description = description.isEmpty() ? null : description;
 
-            System.out.print("Vendor: ");
-            String vendor = scanner.nextLine();
-            vendor = vendor.isEmpty() ? null : vendor;
+        System.out.print("Vendor: ");
+        String vendor = scanner.nextLine();
+        vendor = vendor.isEmpty() ? null : vendor;
 
-            System.out.print("Amount: $");
-            String amountInput = scanner.nextLine();
-            Double amount = amountInput.isEmpty() ? null : Double.parseDouble(amountInput);
+        System.out.print("Amount: $");
+        String amountInput = scanner.nextLine();
+        Double amount = amountInput.isEmpty() ? null : Double.parseDouble(amountInput);
 
         // Filter transactions based on input
         ArrayList<Transactions> filteredTransactions = new ArrayList<>();
@@ -381,6 +381,38 @@ public class TransactionsUtil {
                 }
             }
             br.close();
+
+            for (Transactions transaction : list) {
+                System.out.println(transaction);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void readCustomFile() {
+        list.clear();  // Clear the list to avoid duplicates if this method is called multiple times
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/transactions.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split("\\|");
+                LocalDate date = Transactions.convertDate(data[0]);
+                LocalTime time = Transactions.convertTime(data[1]);
+                String description = data[2];
+                String vendor = data[3];
+                double amount = Double.parseDouble(data[4]);
+                if (amount > 0) {
+                    Transactions transaction = new Transactions(date, time, description, vendor, amount, true);
+                    list.add(transaction);
+                } else {
+                    Transactions transaction = new Transactions(date, time, description, vendor, amount, false);
+                    list.add(transaction);
+                }
+            }
+            br.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
